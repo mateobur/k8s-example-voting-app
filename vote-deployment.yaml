@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: vote
+  labels:
+    name: vote-deployment
+    app: example-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     name: vote
+     role: voteapp
+     app: example-voting-app
+  template:
+    spec:
+      containers:
+        - name: vote
+          image: bencer/example-voting-app-vote:statsd-5
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              memory: 64Mi
+    metadata:
+      labels:
+        name: vote
+        role: voteapp
+        app: example-voting-app
