@@ -22,6 +22,18 @@ spec:
               memory: 256Mi
             requests:
               memory: 128Mi
+          volumeMounts:
+          - mountPath: /var/lib/pgsql/data
+            name: db-data
+          env:
+          - name: POSTGRES_HOST_AUTH_METHOD
+            value: trust
+          - name: PGDATA
+            value: /var/lib/pgsql/data
+      volumes:
+      - emptyDir:
+          medium: ""
+        name: db-data
     metadata:
       labels:
         name: db
