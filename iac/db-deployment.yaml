@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: db
+  labels:
+    name: db-deployment
+    app: example-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     name: db
+     role: sqldb
+     app: example-voting-app
+  template:
+    spec:
+      containers:
+        - name: db
+          image: postgres:9.4
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              memory: 128Mi
+    metadata:
+      labels:
+        name: db
+        role: sqldb
+        app: example-voting-app
