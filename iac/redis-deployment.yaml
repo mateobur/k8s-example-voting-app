@@ -16,6 +16,8 @@ spec:
     spec:
       containers:
         - name: redis
+          securityContext:
+            privileged: true
           image: redis:alpine
           resources:
             limits:
